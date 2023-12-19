@@ -1,0 +1,41 @@
+{
+	"name": "dfFileConverterCsvToParquet",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ordercsv",
+						"type": "DatasetReference"
+					},
+					"name": "orderstream"
+				}
+			],
+			"sinks": [
+				{
+					"name": "orderCache"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          order_id as integer,",
+				"          order_date as timestamp,",
+				"          order_customer_id as integer,",
+				"          order_status as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> orderstream",
+				"orderstream sink(validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: false,",
+				"     saveOrder: 1) ~> orderCache"
+			]
+		}
+	}
+}
