@@ -1,5 +1,5 @@
 {
-	"name": "dfFileConverterCsvToParquet",
+	"name": "dfFileConverterCsvToParquet_Param",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {

@@ -1,0 +1,40 @@
+{
+	"name": "DailyProductRevenueMonthlyParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "storagedthatlinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"order_month": {
+				"type": "String",
+				"defaultValue": "201401"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "retail_db_parquet/Monthly",
+				"fileSystem": "data"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "order_date",
+				"type": "INT96"
+			},
+			{
+				"name": "order_item_product_id",
+				"type": "INT_16"
+			},
+			{
+				"name": "revenue",
+				"type": "DOUBLE"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
